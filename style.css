@@ -118,7 +118,7 @@ html, body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-color: #21466a;
+  background-color: #003052;
   color: white
 }
 
@@ -211,7 +211,7 @@ img{
   padding: 0;
   text-align: center;
   font-size: .8em;
-  color: #444;
+  color: #3E4756;
   position:relative;
 
 }
@@ -310,7 +310,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 18px 10%;
-  background-color: #000b43;
+  background-color: #003052;
   width: 100%;
   top: 0;
   z-index: 2;
@@ -350,7 +350,7 @@ header {
 }
   
   .footer{
-  background:#24252a;
+  background:#3E4756;
   padding:30px 0px;
   font-family: 'Play', sans-serif;
   text-align:center;
