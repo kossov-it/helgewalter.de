@@ -1,10 +1,7 @@
 // Params
 let mainSliderSelector1 = '.main-slider1',
-    navSliderSelector1 = '.nav-slider1',
     mainSliderSelector2 = '.main-slider2',
-    navSliderSelector2 = '.nav-slider2',
     mainSliderSelector3 = '.main-slider3',
-    navSliderSelector3 = '.nav-slider3',
     interleaveOffset = 0.5;
 
 // Main Slider
@@ -67,74 +64,7 @@ let mainSliderOptions = {
 let mainSlider1 = new Swiper(mainSliderSelector1, mainSliderOptions);
 let mainSlider2 = new Swiper(mainSliderSelector2, mainSliderOptions);
 let mainSlider3 = new Swiper(mainSliderSelector3, mainSliderOptions);
-// Navigation Slider
-let navSliderOptions1 = {
-      loop: true,
-      loopAdditionalSlides: 10,
-      speed:1000,
-      spaceBetween: 5,
-      slidesPerView: 5,
-      centeredSlides : true,
-      touchRatio: 0.2,
-      slideToClickedSlide: true,
-      direction: 'vertical',
-      on: {
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-        },
-        click: function(){
-          mainSlider1.autoplay.stop();
-        }
-      }
-    };
-    let navSliderOptions2 = {
-      loop: true,
-      loopAdditionalSlides: 10,
-      speed:1000,
-      spaceBetween: 5,
-      slidesPerView: 5,
-      centeredSlides : true,
-      touchRatio: 0.2,
-      slideToClickedSlide: true,
-      direction: 'vertical',
-      on: {
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-        },
-        click: function(){
-          mainSlider2.autoplay.stop();
-        }
-      }
-    };
-    let navSliderOptions3 = {
-      loop: true,
-      loopAdditionalSlides: 10,
-      speed:1000,
-      spaceBetween: 5,
-      slidesPerView: 5,
-      centeredSlides : true,
-      touchRatio: 0.2,
-      slideToClickedSlide: true,
-      direction: 'vertical',
-      on: {
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-        },
-        click: function(){
-          mainSlider3.autoplay.stop();
-        }
-      }
-    };
-let navSlider1 = new Swiper(navSliderSelector1, navSliderOptions1);
-let navSlider2 = new Swiper(navSliderSelector2, navSliderOptions2);
-let navSlider3 = new Swiper(navSliderSelector3, navSliderOptions3);
-// Matching sliders
-mainSlider1.controller.control = navSlider1;
-navSlider1.controller.control = mainSlider1;
-mainSlider2.controller.control = navSlider2;
-navSlider2.controller.control = mainSlider2;
-mainSlider3.controller.control = navSlider3;
-navSlider3.controller.control = mainSlider3;
+
 
 //Based on the Scroller function from @sallar
 var $content = $('header .content')
@@ -190,10 +120,13 @@ Scroller.prototype = {
     var slowScroll = currentScrollY / 2
       , blurScroll = currentScrollY * 2
       , opaScroll = 1.4 - currentScrollY / 400;
-   if(currentScrollY > 100 )
-     $('header').css('height','3em');
-   else
-     $('header').css('height','4em');
+   if(currentScrollY > wHeight ){
+    $('header').css('position','fixed');
+   }
+   else {
+    $('header').css('position','relative');
+   }
+
     
     $content.css({
       'transform'         : 'translateY(' + slowScroll + 'px)',
