@@ -109,7 +109,6 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-color: #003052;
   color: white;
 }
 
@@ -123,6 +122,7 @@ html {
 
 body {
   font-size: 1.3em;
+  background-color: #003052;
 }
 
 .intro {
@@ -369,4 +369,26 @@ a.active {
   .footer .row a i {
     margin: 0% 3%;
   }
+}
+
+.previous {
+  background-color: #3E4756;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.previous:hover {
+  background-color: #005A7C;
+}
+
+.impressum {
+  background-color: #fff;
+  color: #333;
+  padding: 0 2em;
+}
+
+.paragrah {
+  margin-top: 2em;
 }
