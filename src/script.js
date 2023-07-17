@@ -120,7 +120,7 @@ Scroller.prototype = {
     var slowScroll = currentScrollY / 2
       , blurScroll = currentScrollY * 2
       , opaScroll = 1.4 - currentScrollY / 400;
-   if(currentScrollY > wHeight ){
+   if(currentScrollY > wHeight  ){
     $('header').css('position','fixed');
    }
    else {
@@ -144,3 +144,8 @@ Scroller.prototype = {
 
 var scroller = new Scroller();  
 scroller.init();
+
+function scrollDown(event) {
+  event.preventDefault()
+  window.scrollBy(0,wHeight)
+}

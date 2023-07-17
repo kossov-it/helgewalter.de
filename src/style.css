@@ -166,8 +166,8 @@ img{
   margin-right:20px
 }
 .site {
-  padding-top: 100px; /* Adjust the padding value as needed */
-  margin-top: -100px;
+  padding-top: 6em; /* Adjust the padding value as needed */
+  margin-top: -6em;
   text-align: center;
   font-size: .8em;
   position:relative;
