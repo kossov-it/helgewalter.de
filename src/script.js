@@ -149,3 +149,30 @@ function scrollDown(event) {
   event.preventDefault()
   window.scrollBy(0,wHeight)
 }
+
+// Get all the navigation links
+const navLinks = document.querySelectorAll('nav a');
+console.log(navLinks)
+// Add a scroll event listener to the window
+window.addEventListener('scroll', () => {
+  // Get the current scroll position
+  const currentScrollPos = window.pageYOffset;
+
+  // Check each section's position and height
+  // to determine which section is in view
+  const sections = document.querySelectorAll('section');
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    if (
+      currentScrollPos >= sectionTop - 50 &&
+      currentScrollPos < sectionTop + sectionHeight
+    ) {
+      // If a section is in view, add 'active' class to the corresponding link
+      const targetLink = document.querySelector(`nav a[href="#${section.id}"]`);
+      navLinks.forEach((link) => link.classList.remove('active'));
+      targetLink.classList.add('active');
+    }
+  });
+});
