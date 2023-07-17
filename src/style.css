@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Regular.ttf') format('truetype');
+}
+
 [class^=swiper-button-] {
   transition: all 0.3s ease;
 }
@@ -105,7 +110,7 @@ body {
   margin: 0;
   height: 100%;
   background-color: #003052;
-  color: white
+  color: white;
 }
 
 html {
@@ -298,7 +303,6 @@ header {
 .nav__links a,
 .cta,
 .overlay__content a {
-  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   color: #edf0f1;
   text-decoration: none;
@@ -324,7 +328,6 @@ a.active {
 .footer {
   background-color: #3E4756;
   padding: 25px 0px;
-  font-family: 'Play', sans-serif;
   text-align: center;
 }
 
