@@ -134,6 +134,7 @@ body {
   margin-top: -.5em;
 }
 .intro hgroup {
+  border-radius: 30px;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
