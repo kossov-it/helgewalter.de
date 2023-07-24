@@ -417,6 +417,7 @@ a.active,
 .box {
   margin-top: 4em;
   width: 50%;
+  margin-bottom: 2em;
 }
 
 .box-container {
