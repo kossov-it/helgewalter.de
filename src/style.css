@@ -276,6 +276,33 @@ header nav {
   transform-origin: 0% 100%;
 }
 
+.arrow-left {
+  height: 6px;
+  background: rgb(255, 255, 255);
+  transform: rotate(130deg);
+  transform-origin: 0% 0%;
+  border-radius: 5px;
+}
+
+.arrow-left:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 100%;
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  transform: rotate(-90deg);
+  transform-origin: 0% 100%;
+}
+
+.arrow-container-left {
+  width: 25px;
+  display: inline-block;
+  margin-bottom: 0.7em;
+}
+
 @keyframes bounce {
   50% {
     transform: translateY(-15px);
@@ -302,7 +329,8 @@ header {
 
 .nav__links a,
 .cta,
-.overlay__content a {
+.overlay__content a,
+.return {
   font-weight: 500;
   color: #edf0f1;
   text-decoration: none;
@@ -314,14 +342,16 @@ header {
   justify-content: center;
 }
 
-.nav__links li a {
+.nav__links li a,
+.return {
   transition: color 0.3s ease 0s;
   padding: 0.5em 1.6em;
   border-radius: 30px;
 }
 
 .nav__links li a:hover,
-a.active {
+a.active,
+.return:hover {
   background-color: #005A7C;
 }
 
@@ -382,12 +412,17 @@ a.active {
   background-color: #005A7C;
 }
 
-.impressum {
+
+
+.box {
+  margin-top: 4em;
+  width: 50%;
+}
+
+.box-container {
+  display: flex;
   background-color: #fff;
   color: #333;
   padding: 0 2em;
-}
 
-.paragrah {
-  margin-top: 4em;
 }
