@@ -279,7 +279,7 @@ header nav {
 .arrow-left {
   height: 6px;
   background: rgb(255, 255, 255);
-  transform: rotate(120deg);
+  transform: rotate(135deg);
   transform-origin: 0% 0%;
   border-radius: 5px;
 }
