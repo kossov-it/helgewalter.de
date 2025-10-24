@@ -1,176 +1,311 @@
-// Params
-let mainSliderSelector1 = '.main-slider1',
-  mainSliderSelector2 = '.main-slider2',
-  mainSliderSelector3 = '.main-slider3',
-  interleaveOffset = 0.5;
+// ========================================
+// MODERN MARITIME DESIGN - HELGE WALTER
+// Enhanced JavaScript for Swiper 8 & Animations
+// ========================================
 
-// Main Slider
-let mainSliderOptions = {
+// ========================================
+// SWIPER CAROUSEL INITIALIZATION
+// ========================================
+
+// Configuration for all property swipers
+const swiperConfig = {
   loop: true,
-  speed: 1000,
+  speed: 800,
   autoplay: {
-    delay: 3000
+    delay: 4000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
   },
-  loopAdditionalSlides: 10,
-  grabCursor: true,
-  watchSlidesProgress: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-  on: {
-    init: function () {
-      this.autoplay.stop();
-    },
-    imagesReady: function () {
-      this.el.classList.remove('loading');
-      this.autoplay.start();
-    },
-    slideChangeTransitionEnd: function () {
-      /*           let swiper = this,
-                    captions = swiper.el.querySelectorAll('.caption');
-                for (let i = 0; i < captions.length; ++i) {
-                  captions[i].classList.remove('show');
-                }
-                swiper.slides[swiper.activeIndex].querySelector('.caption').classList.add('show'); */
-    },
-    progress: function () {
-      let swiper = this;
-      for (let i = 0; i < swiper.slides.length; i++) {
-        let slideProgress = swiper.slides[i].progress,
-          innerOffset = swiper.width * interleaveOffset,
-          innerTranslate = slideProgress * innerOffset;
-
-        swiper.slides[i].querySelector(".slide-bgimg").style.transform =
-          "translateX(" + innerTranslate + "px)";
-      }
-    },
-    touchStart: function () {
-      let swiper = this;
-      for (let i = 0; i < swiper.slides.length; i++) {
-        swiper.slides[i].style.transition = "";
-      }
-    },
-    setTransition: function (speed) {
-      let swiper = this;
-      for (let i = 0; i < swiper.slides.length; i++) {
-        swiper.slides[i].style.transition = speed + "ms";
-        swiper.slides[i].querySelector(".slide-bgimg").style.transition =
-          speed + "ms";
-      }
-    }
-  }
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    dynamicBullets: true,
+  },
+  keyboard: {
+    enabled: true,
+    onlyInViewport: true,
+  },
+  grabCursor: true,
+  watchSlidesProgress: true,
 };
-let mainSlider1 = new Swiper(mainSliderSelector1, mainSliderOptions);
-let mainSlider2 = new Swiper(mainSliderSelector2, mainSliderOptions);
-let mainSlider3 = new Swiper(mainSliderSelector3, mainSliderOptions);
 
+// Initialize all swipers
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Swiper 1 (Palmaille 82)
+  const swiper1 = new Swiper('.swiper-1', swiperConfig);
 
-//Based on the Scroller function from @sallar
-var $content = $('header .content')
-  , $blur = $('header .overlay')
-  , wHeight = $(window).height();
+  // Initialize Swiper 2 (Hammer Deich 70)
+  const swiper2 = new Swiper('.swiper-2', swiperConfig);
 
-$(window).on('resize', function () {
-  wHeight = $(window).height();
+  // Initialize Swiper 3 (Hammer Deich 60)
+  const swiper3 = new Swiper('.swiper-3', swiperConfig);
 });
 
-window.requestAnimFrame = (function () {
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    function (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    };
-})();
+// ========================================
+// SMOOTH SCROLL & NAVIGATION
+// ========================================
 
-function Scroller() {
-  this.latestKnownScrollY = 0;
-  this.ticking = false;
-}
-
-Scroller.prototype = {
-
-  init: function () {
-    window.addEventListener('scroll', this.onScroll.bind(this), false);
-    $blur.css('background-image', $('header:first-of-type').css('background-image'));
-  },
-
-
-  onScroll: function () {
-    this.latestKnownScrollY = window.scrollY;
-    this.requestTick();
-  },
-
-
-  requestTick: function () {
-    if (!this.ticking) {
-      window.requestAnimFrame(this.update.bind(this));
-    }
-    this.ticking = true;
-  },
-
-  update: function () {
-    var currentScrollY = this.latestKnownScrollY;
-    this.ticking = false;
-
-
-    var slowScroll = currentScrollY / 2
-      , blurScroll = currentScrollY * 2
-      , opaScroll = 1.4 - currentScrollY / 400;
-    if (currentScrollY > wHeight) {
-      $('header').css('position', 'fixed');
-    }
-    else {
-      $('header').css('position', 'relative');
-    }
-
-
-    $content.css({
-      'transform': 'translateY(' + slowScroll + 'px)',
-      '-moz-transform': 'translateY(' + slowScroll + 'px)',
-      '-webkit-transform': 'translateY(' + slowScroll + 'px)',
-      'opacity': opaScroll
-    });
-
-    $blur.css({
-      'opacity': blurScroll / wHeight
-    });
-  }
-};
-
-
-var scroller = new Scroller();
-scroller.init();
-
+// Smooth scroll to section
 function scrollDown(event) {
-  event.preventDefault()
-  window.scrollBy(0, wHeight)
+  event.preventDefault();
+  const windowHeight = window.innerHeight;
+  window.scrollBy({
+    top: windowHeight,
+    behavior: 'smooth'
+  });
 }
 
-// Get all the navigation links
-const navLinks = document.querySelectorAll('nav a');
-console.log(navLinks)
-// Add a scroll event listener to the window
-window.addEventListener('scroll', () => {
-  // Get the current scroll position
-  const currentScrollPos = window.pageYOffset;
+// Update active navigation link on scroll
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.property-section');
 
-  // Check each section's position and height
-  // to determine which section is in view
-  const sections = document.querySelectorAll('section');
+function updateActiveNavLink() {
+  const currentScrollPos = window.pageYOffset;
+  const windowHeight = window.innerHeight;
+
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
+    const sectionId = section.getAttribute('id');
 
+    // Check if section is in viewport (with offset for fixed header)
     if (
-      currentScrollPos >= sectionTop - 50 &&
-      currentScrollPos < sectionTop + sectionHeight
+      currentScrollPos >= sectionTop - 200 &&
+      currentScrollPos < sectionTop + sectionHeight - 200
     ) {
-      // If a section is in view, add 'active' class to the corresponding link
-      const targetLink = document.querySelector(`nav a[href="#${section.id}"]`);
+      // Remove active class from all links
       navLinks.forEach((link) => link.classList.remove('active'));
-      targetLink.classList.add('active');
+
+      // Add active class to current section's link
+      const targetLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+      if (targetLink) {
+        targetLink.classList.add('active');
+      }
+    }
+  });
+}
+
+// ========================================
+// SCROLL ANIMATIONS
+// ========================================
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+  root: null,
+  threshold: 0.15,
+  rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Optional: unobserve after animation to improve performance
+      // observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Observe all property sections
+document.addEventListener('DOMContentLoaded', () => {
+  const propertySections = document.querySelectorAll('.property-section');
+  propertySections.forEach(section => {
+    observer.observe(section);
+  });
+});
+
+// ========================================
+// HEADER BEHAVIOR ON SCROLL
+// ========================================
+
+let lastScrollTop = 0;
+const header = document.querySelector('.header');
+let ticking = false;
+
+function updateHeader() {
+  const currentScrollPos = window.pageYOffset;
+
+  // Add shadow to header when scrolled
+  if (currentScrollPos > 100) {
+    header.style.boxShadow = '0 4px 20px rgba(0, 24, 41, 0.3)';
+    header.style.background = 'rgba(0, 24, 41, 0.98)';
+  } else {
+    header.style.boxShadow = '0 4px 12px rgba(0, 24, 41, 0.1)';
+    header.style.background = 'rgba(0, 24, 41, 0.95)';
+  }
+
+  lastScrollTop = currentScrollPos;
+  ticking = false;
+}
+
+// ========================================
+// EVENT LISTENERS
+// ========================================
+
+// Throttled scroll event
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      updateActiveNavLink();
+      updateHeader();
+    });
+    ticking = true;
+  }
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+
+    if (targetId === '#') {
+      return; // Skip for scroll down button
+    }
+
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      const headerHeight = header ? header.offsetHeight : 0;
+      const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
   });
 });
+
+// ========================================
+// PARALLAX EFFECT (Optional Enhancement)
+// ========================================
+
+// Add subtle parallax effect to property images on scroll
+function parallaxEffect() {
+  const propertyImages = document.querySelectorAll('.property-image');
+
+  propertyImages.forEach(image => {
+    const parent = image.closest('.property-section');
+    if (!parent) return;
+
+    const rect = parent.getBoundingClientRect();
+    const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+
+    if (scrollPercent >= 0 && scrollPercent <= 1) {
+      const translateY = (scrollPercent - 0.5) * 20; // Subtle movement
+      image.style.transform = `scale(1.05) translateY(${translateY}px)`;
+    }
+  });
+}
+
+// Apply parallax on scroll (throttled)
+let parallaxTicking = false;
+window.addEventListener('scroll', () => {
+  if (!parallaxTicking) {
+    window.requestAnimationFrame(() => {
+      parallaxEffect();
+      parallaxTicking = false;
+    });
+    parallaxTicking = true;
+  }
+});
+
+// ========================================
+// PRELOAD OPTIMIZATION
+// ========================================
+
+// Preload images for better performance
+window.addEventListener('load', () => {
+  const lazyImages = document.querySelectorAll('.property-image');
+
+  lazyImages.forEach(image => {
+    const bgImage = image.style.backgroundImage;
+    if (bgImage) {
+      const imgUrl = bgImage.slice(4, -1).replace(/"/g, '');
+      const img = new Image();
+      img.src = imgUrl;
+    }
+  });
+});
+
+// ========================================
+// MOBILE MENU ENHANCEMENT (Future)
+// ========================================
+
+// Add touch event support for mobile
+if ('ontouchstart' in window) {
+  document.body.classList.add('touch-device');
+}
+
+// ========================================
+// PERFORMANCE OPTIMIZATION
+// ========================================
+
+// Debounce function for resize events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Handle window resize
+const handleResize = debounce(() => {
+  // Recalculate positions on resize
+  updateActiveNavLink();
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+// ========================================
+// ACCESSIBILITY ENHANCEMENTS
+// ========================================
+
+// Keyboard navigation support
+document.addEventListener('keydown', (e) => {
+  // Alt + number keys for quick navigation
+  if (e.altKey && e.key >= '1' && e.key <= '3') {
+    e.preventDefault();
+    const sectionNum = parseInt(e.key);
+    const section = document.getElementById(`section${sectionNum}`);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+});
+
+// Focus management for accessibility
+const focusableElements = document.querySelectorAll(
+  'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+);
+
+// Skip to main content (accessibility feature)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab' && e.shiftKey === false && document.activeElement === document.body) {
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+      mainContent.focus();
+    }
+  }
+});
+
+// ========================================
+// CONSOLE INFO
+// ========================================
+
+console.log('%c🌊 Helge Walter Maritime Properties', 'color: #003052; font-size: 16px; font-weight: bold;');
+console.log('%c✨ Modern Premium Design by Claude', 'color: #d4af37; font-size: 12px;');
+console.log('%c📱 Fully Responsive | Swiper 8 | Smooth Animations', 'color: #005a8c; font-size: 10px;');
