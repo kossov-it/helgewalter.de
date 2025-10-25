@@ -132,14 +132,22 @@ let ticking = false;
 
 function updateHeader() {
   const currentScrollPos = window.pageYOffset;
+  const windowHeight = window.innerHeight;
 
-  // Add shadow to header when scrolled
-  if (currentScrollPos > 100) {
-    header.style.boxShadow = '0 4px 20px rgba(0, 24, 41, 0.3)';
-    header.style.background = 'rgba(0, 24, 41, 0.98)';
+  // Show header after scrolling past intro section
+  if (currentScrollPos > windowHeight * 0.75) {
+    header.classList.add('visible');
+
+    // Add enhanced shadow when scrolled further
+    if (currentScrollPos > windowHeight + 100) {
+      header.style.boxShadow = '0 4px 20px rgba(0, 24, 41, 0.3)';
+      header.style.background = 'rgba(0, 24, 41, 0.98)';
+    } else {
+      header.style.boxShadow = '0 4px 12px rgba(0, 24, 41, 0.1)';
+      header.style.background = 'rgba(0, 24, 41, 0.95)';
+    }
   } else {
-    header.style.boxShadow = '0 4px 12px rgba(0, 24, 41, 0.1)';
-    header.style.background = 'rgba(0, 24, 41, 0.95)';
+    header.classList.remove('visible');
   }
 
   lastScrollTop = currentScrollPos;

@@ -114,10 +114,14 @@ body {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 3rem;
+  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
   animation: fadeInUp 1.2s ease-out 0.6s both;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .scroll-link {
@@ -196,7 +200,14 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
   padding: 1.5rem 5%;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.header.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .nav {
@@ -284,6 +295,8 @@ body {
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  min-height: 500px;
+  max-height: 650px;
 }
 
 .property-card:hover {
@@ -306,8 +319,10 @@ body {
 .property-gallery {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: stretch;
 }
 
 .property-swiper {
@@ -367,23 +382,33 @@ body {
 
 /* Swiper Pagination */
 .property-swiper .swiper-pagination {
-  bottom: 20px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
 .property-swiper .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background: var(--white);
-  opacity: 0.5;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 !important;
+}
+
+.property-swiper .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
 }
 
 .property-swiper .swiper-pagination-bullet-active {
   background: var(--gold-accent);
-  opacity: 1;
-  border-color: var(--white);
-  transform: scale(1.2);
+  border-color: var(--gold-accent);
+  width: 32px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
 }
 
 /* ========================================
@@ -573,6 +598,253 @@ body {
 }
 
 /* ========================================
+   IMPRESSUM PAGE STYLES
+   ======================================== */
+.impressum-page {
+  min-height: 100vh;
+  padding: 0;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-primary) 50%, var(--navy-medium) 100%);
+  background-attachment: fixed;
+}
+
+/* Back Navigation */
+.back-nav {
+  padding: 2rem 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.back-link:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-accent);
+  color: var(--gold-accent);
+  transform: translateX(-5px);
+}
+
+.back-link svg {
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+/* Main Container */
+.impressum-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 5% 4rem;
+}
+
+/* Section Styling */
+.impressum-section {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.title-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent) 0%, transparent 100%);
+}
+
+/* Contact Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.contact-card {
+  background: rgba(0, 48, 82, 0.3);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  background: rgba(0, 48, 82, 0.5);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 24, 41, 0.3);
+}
+
+.contact-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-accent);
+  border: 2px solid var(--gold-accent);
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+  transform: scale(1.1);
+  background: var(--gold-accent);
+  color: var(--navy-deep);
+  border-color: var(--gold-light);
+}
+
+.contact-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-accent);
+  margin-bottom: 1rem;
+}
+
+.contact-detail {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.contact-detail a {
+  color: var(--gold-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.contact-detail a:hover {
+  color: var(--white);
+  border-bottom-color: var(--gold-accent);
+}
+
+/* Legal Content */
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.legal-block h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-accent);
+  margin-bottom: 1rem;
+}
+
+.legal-block p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.9;
+  font-size: 1rem;
+  text-align: justify;
+}
+
+.legal-block strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.legal-block a {
+  color: var(--gold-light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.legal-block a:hover {
+  color: var(--white);
+  border-bottom-color: var(--gold-accent);
+}
+
+/* Footer */
+.impressum-footer {
+  background: rgba(0, 24, 41, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 5%;
+  text-align: center;
+}
+
+.impressum-footer p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive Design for Impressum */
+@media (max-width: 768px) {
+  .impressum-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .back-nav {
+    padding: 1.5rem 3%;
+  }
+
+  .impressum-container {
+    padding: 1rem 3% 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .impressum-section {
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .legal-block p {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
    PRINT STYLES
    ======================================== */
 @media print {
@@ -581,11 +853,14 @@ body {
   .swiper-button-prev,
   .swiper-button-next,
   .swiper-pagination,
-  .scroll-indicator {
+  .scroll-indicator,
+  .back-nav {
     display: none;
   }
 
-  .property-card {
+  .property-card,
+  .impressum-section,
+  .contact-card {
     break-inside: avoid;
     box-shadow: none;
     border: 1px solid #000;
