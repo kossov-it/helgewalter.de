@@ -298,15 +298,6 @@ body {
   box-shadow: 0 30px 80px rgba(0, 24, 41, 0.4);
 }
 
-.property-section-reverse .property-card {
-  direction: rtl;
-}
-
-.property-section-reverse .property-info,
-.property-section-reverse .property-gallery {
-  direction: ltr;
-}
-
 /* ========================================
    PROPERTY GALLERY / CAROUSEL
    ======================================== */
@@ -333,8 +324,9 @@ body {
   transition: transform 0.8s ease;
 }
 
+/* Remove zoom effect to prevent image cropping */
 .swiper-slide-active .property-image {
-  transform: scale(1.02);
+  transform: scale(1);
 }
 
 /* Swiper Navigation Buttons */
@@ -470,6 +462,14 @@ body {
   margin: 0 auto;
 }
 
+.footer-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
 .footer-text {
   margin: 0;
 }
@@ -490,6 +490,46 @@ body {
   background: rgba(212, 175, 55, 0.1);
 }
 
+/* Footer Branding */
+.footer-branding {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  padding: 0.5rem;
+}
+
+.footer-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.footer-logo svg {
+  width: 28px;
+  height: auto;
+  display: block;
+}
+
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
@@ -497,10 +537,6 @@ body {
   .property-card {
     grid-template-columns: 1fr;
     min-height: auto;
-  }
-
-  .property-section-reverse .property-card {
-    direction: ltr;
   }
 
   .property-gallery {
@@ -598,6 +634,15 @@ body {
   .property-swiper .swiper-button-prev::after,
   .property-swiper .swiper-button-next::after {
     font-size: 1rem;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-logo svg {
+    width: 24px;
   }
 }
 
