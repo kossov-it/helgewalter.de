@@ -132,22 +132,14 @@ let ticking = false;
 
 function updateHeader() {
   const currentScrollPos = window.pageYOffset;
-  const windowHeight = window.innerHeight;
 
-  // Show header after scrolling past intro section
-  if (currentScrollPos > windowHeight * 0.75) {
-    header.classList.add('visible');
-
-    // Add enhanced shadow when scrolled further
-    if (currentScrollPos > windowHeight + 100) {
-      header.style.boxShadow = '0 4px 20px rgba(0, 24, 41, 0.3)';
-      header.style.background = 'rgba(0, 24, 41, 0.98)';
-    } else {
-      header.style.boxShadow = '0 4px 12px rgba(0, 24, 41, 0.1)';
-      header.style.background = 'rgba(0, 24, 41, 0.95)';
-    }
+  // Add enhanced shadow when scrolled
+  if (currentScrollPos > 50) {
+    header.style.boxShadow = '0 4px 20px rgba(0, 24, 41, 0.3)';
+    header.style.background = 'rgba(0, 24, 41, 0.98)';
   } else {
-    header.classList.remove('visible');
+    header.style.boxShadow = '0 10px 30px rgba(0, 24, 41, 0.2)';
+    header.style.background = 'rgba(0, 24, 41, 0.95)';
   }
 
   lastScrollTop = currentScrollPos;
@@ -193,38 +185,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ========================================
-// PARALLAX EFFECT (Optional Enhancement)
+// PARALLAX EFFECT (Disabled for stability)
 // ========================================
 
-// Add subtle parallax effect to property images on scroll
-function parallaxEffect() {
-  const propertyImages = document.querySelectorAll('.property-image');
-
-  propertyImages.forEach(image => {
-    const parent = image.closest('.property-section');
-    if (!parent) return;
-
-    const rect = parent.getBoundingClientRect();
-    const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-
-    if (scrollPercent >= 0 && scrollPercent <= 1) {
-      const translateY = (scrollPercent - 0.5) * 20; // Subtle movement
-      image.style.transform = `scale(1.05) translateY(${translateY}px)`;
-    }
-  });
-}
-
-// Apply parallax on scroll (throttled)
-let parallaxTicking = false;
-window.addEventListener('scroll', () => {
-  if (!parallaxTicking) {
-    window.requestAnimationFrame(() => {
-      parallaxEffect();
-      parallaxTicking = false;
-    });
-    parallaxTicking = true;
-  }
-});
+// Parallax effect disabled to prevent image scaling issues
+// Images use subtle scale on active slide via CSS instead
 
 // ========================================
 // PRELOAD OPTIMIZATION

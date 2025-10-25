@@ -115,13 +115,15 @@ body {
 .scroll-indicator {
   position: absolute;
   bottom: 4rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   animation: fadeInUp 1.2s ease-out 0.6s both;
   z-index: 10;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .scroll-link {
@@ -191,23 +193,16 @@ body {
    NAVIGATION HEADER
    ======================================== */
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   background: rgba(0, 24, 41, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   padding: 1.5rem 5%;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.header.visible {
-  transform: translateY(0);
-  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .nav {
@@ -266,7 +261,7 @@ body {
 .main-content {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 8rem 5% 4rem;
+  padding: 4rem 5% 4rem;
 }
 
 /* ========================================
@@ -295,8 +290,7 @@ body {
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  min-height: 500px;
-  max-height: 650px;
+  min-height: 550px;
 }
 
 .property-card:hover {
@@ -336,11 +330,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: transform 0.6s ease;
+  transition: transform 0.8s ease;
 }
 
 .swiper-slide-active .property-image {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 /* Swiper Navigation Buttons */
@@ -415,15 +409,17 @@ body {
    PROPERTY INFO
    ======================================== */
 .property-info {
-  padding: 4rem;
+  padding: 3rem 3.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: linear-gradient(135deg, rgba(0, 48, 82, 0.8) 0%, rgba(0, 77, 122, 0.6) 100%);
+  overflow-y: auto;
 }
 
 .property-info-inner {
   max-width: 600px;
+  width: 100%;
 }
 
 .property-title {
@@ -444,10 +440,10 @@ body {
 }
 
 .property-description {
-  font-size: 1.0625rem;
-  line-height: 1.9;
+  font-size: 1rem;
+  line-height: 1.8;
   color: rgba(255, 255, 255, 0.9);
-  text-align: justify;
+  text-align: left;
   font-weight: 300;
 }
 
@@ -500,6 +496,7 @@ body {
 @media (max-width: 1200px) {
   .property-card {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .property-section-reverse .property-card {
@@ -507,11 +504,13 @@ body {
   }
 
   .property-gallery {
-    height: 500px;
+    min-height: 450px;
+    height: 450px;
   }
 
   .property-info {
     padding: 3rem 2rem;
+    min-height: auto;
   }
 }
 
@@ -530,27 +529,31 @@ body {
   }
 
   .main-content {
-    padding: 6rem 3% 2rem;
+    padding: 3rem 3% 2rem;
   }
 
   .property-section {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
   }
 
   .property-gallery {
-    height: 400px;
+    min-height: 350px;
+    height: 350px;
   }
 
   .property-info {
     padding: 2rem 1.5rem;
+    min-height: auto;
   }
 
   .property-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   .property-description {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
   }
 
   .intro-title {
@@ -564,16 +567,26 @@ body {
 
 @media (max-width: 480px) {
   .nav-links {
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
   .property-gallery {
+    min-height: 300px;
     height: 300px;
   }
 
   .property-info {
     padding: 1.5rem 1rem;
+    min-height: auto;
+  }
+
+  .property-title {
+    font-size: 1.5rem;
+  }
+
+  .property-description {
+    font-size: 0.875rem;
   }
 
   .property-swiper .swiper-button-prev,
